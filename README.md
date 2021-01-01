@@ -1,4 +1,4 @@
-#`EXTRANET IES AL-ANDALUS`  
+# `EXTRANET IES AL-ANDALUS`   
 #### Usando PHP para acceder a BBDD  
 
     Tras realizar un login el usuario "alumno" podrá acceder a sus datos personales y académicos. El usuario  

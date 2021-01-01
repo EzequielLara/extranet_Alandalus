@@ -1,4 +1,4 @@
-<!--Pagina de inicio que muestra un formulario de acceso. Si se valida el acceso se nos redirigirá a controlSesiones.php-->
+<!--Pagina de inicio que muestra un formulario de acceso. Si se valida el acceso se nos redirigirá a controlSesiones.php.-->
 
 <?php
     include("conexionesBD/config.php");

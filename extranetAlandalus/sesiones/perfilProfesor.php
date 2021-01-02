@@ -12,13 +12,7 @@ $cabeceras_trimestres = ["id", "nombre", "evaluación", "orden"];
 
 
 <html>
-<script>
-    function confirmacion(){
-        if(cofi){
-            return true;
-        }else{return false;}
-    }
-</script>
+
 <!--Desde este menú accederemos a las distintas tablas. El paso de párametros es necesario para continuar mostrando al usuario su nombre y perfil-->
   <ul class="nav nav-tabs">
           <li class="nav-item">

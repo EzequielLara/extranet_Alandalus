@@ -11,11 +11,11 @@ $cabeceras_asignaturas = ["cod.asignatura", "asignatura", "abreviatura", "curso"
 $cabeceras_curso = ["id.curso", "curso"];
 
 ?>
-<html>
+
   <!--Desde este menú accederemos a las distintas tablas gracias al paso de párametros necesarios para realizar las consultas dinámicas ya que a cada usuario con perfil de alumno se le mostrará un contenido diferente.Los parámetros nombre y perfil tambien son necesarios pasarlos si queremos continuar mostrando, en la parte superior de la página, dichos datos.-->
   <ul class="nav nav-tabs">
           <li class="nav-item">
-              <a class="nav-link active" href="controlSesiones.php?opcion=alumnos&nombre=<?php echo $_GET["nombre"]?>&perfil=<?php echo $_GET["perfil"]?>&curso=<?php echo $_GET["curso"]?>&id=<?php echo $_GET["id"]?>">Alumno</a>
+              <a class="nav-link" href="controlSesiones.php?opcion=alumnos&nombre=<?php echo $_GET["nombre"]?>&perfil=<?php echo $_GET["perfil"]?>&curso=<?php echo $_GET["curso"]?>&id=<?php echo $_GET["id"]?>">Alumno</a>
           </li>
           <li class="nav-item">
               <a class="nav-link" href="controlSesiones.php?opcion=asignaturas&nombre=<?php echo $_GET["nombre"]?>&perfil=<?php echo $_GET["perfil"]?>&curso=<?php echo $_GET["curso"]?>&id=<?php echo $_GET["id"]?>">Asignaturas</a>
@@ -24,7 +24,7 @@ $cabeceras_curso = ["id.curso", "curso"];
               <a class="nav-link" href="controlSesiones.php?opcion=curso&nombre=<?php echo $_GET["nombre"]?>&perfil=<?php echo $_GET["perfil"]?>&curso=<?php echo $_GET["curso"]?>&id=<?php echo $_GET["id"]?>">Curso</a>
           </li>
           <li class="nav-item">
-              <a class="nav-link" href="http://localhost/Lara_Exposito_Ezequiel_DWES_Tarea02/extranetAlandalus/index.php">Salir</a>
+              <a class="nav-link" href="../index.php">Salir</a>
           </li>
       </ul>
     <table class="table">
@@ -93,4 +93,4 @@ $cabeceras_curso = ["id.curso", "curso"];
       </tr>
     </tbody>
   </table>
-</html>
+

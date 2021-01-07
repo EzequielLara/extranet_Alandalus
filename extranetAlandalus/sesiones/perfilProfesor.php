@@ -10,13 +10,10 @@ $cabeceras_trimestres = ["id", "nombre", "evaluación", "orden"];
 
 ?>
 
-
-<html>
-
 <!--Desde este menú accederemos a las distintas tablas. El paso de párametros es necesario para continuar mostrando al usuario su nombre y perfil-->
   <ul class="nav nav-tabs">
           <li class="nav-item">
-              <a class="nav-link active" href="controlSesiones.php?datos=alumnos&nombre=<?php echo $_GET["nombre"]?>&perfil=<?php echo $_GET["perfil"]?>">Alumnos</a>
+              <a class="nav-link" href="controlSesiones.php?datos=alumnos&nombre=<?php echo $_GET["nombre"]?>&perfil=<?php echo $_GET["perfil"]?>">Alumnos</a>
           </li>
           <li class="nav-item">
               <a class="nav-link" href="controlSesiones.php?datos=cursos&nombre=<?php echo $_GET["nombre"]?>&perfil=<?php echo $_GET["perfil"]?>">Cursos</a>
@@ -25,7 +22,7 @@ $cabeceras_trimestres = ["id", "nombre", "evaluación", "orden"];
               <a class="nav-link" href="controlSesiones.php?datos=trimestres&nombre=<?php echo $_GET["nombre"]?>&perfil=<?php echo $_GET["perfil"]?>">Trimestres</a>
           </li>
           <li class="nav-item">
-              <a class="nav-link" href="http://localhost/Lara_Exposito_Ezequiel_DWES_Tarea02/extranetAlandalus/index.php">Salir</a>
+              <a class="nav-link" href="../index.php">Salir</a>
           </li>
           <li style="text-align:right; width:57%">
           <?php
@@ -146,4 +143,4 @@ $cabeceras_trimestres = ["id", "nombre", "evaluación", "orden"];
       </tr>
     </tbody>
   </table>
-</html>
+

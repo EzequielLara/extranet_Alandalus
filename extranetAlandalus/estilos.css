@@ -1,0 +1,15 @@
+.content{
+    width: 30%;
+    margin: auto;
+    text-align: center;
+}
+.formulario{
+    text-align: left;
+   
+}
+img{
+    margin: 8px 8px;
+}
+.colorFilas{
+    background-color:red;
+}

@@ -24,11 +24,7 @@ $cabeceras_curso = ["id.curso", "curso"];
               <a class="nav-link" href="controlSesiones.php?opcion=curso&nombre=<?php echo $_GET["nombre"]?>&perfil=<?php echo $_GET["perfil"]?>&curso=<?php echo $_GET["curso"]?>&id=<?php echo $_GET["id"]?>">Curso</a>
           </li>
           <li class="nav-item">
-<<<<<<< HEAD
-              <a class="nav-link" href="http://../index.php">Salir</a>
-=======
               <a class="nav-link" href="../index.php">Salir</a>
->>>>>>> main
           </li>
       </ul>
     <table class="table">

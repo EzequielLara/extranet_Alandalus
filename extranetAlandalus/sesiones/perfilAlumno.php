@@ -47,7 +47,7 @@ $cabeceras_curso = ["id.curso", "curso"];
           //MOSTRAMOS LOS TÍTULOS DE LAS COLUMNAS
               if ($_GET["opcion"] == "alumnos"){
 
-                  titulosColumnas($cabeceras_alumnos); //estas funciones las encontraremos en el archivo funciones.php
+                  titulosColumnas($cabeceras_alumnos); //estas funciones las encontraremos en el archivo consultas.php
                   
               } elseif($_GET["opcion"] == "asignaturas"){
                   
@@ -59,7 +59,7 @@ $cabeceras_curso = ["id.curso", "curso"];
               };
 
             }else{
-               // Este texto con imagen se mostrará antes de haber pulsado cualquier opción de la barra de menú
+               // Este texto con imagen se mostrará antes de haber pulsado cualquier opción de la barra de menú. Una vez pulsado cualquier opción desaparecerá.
                 echo "</br>";
                 echo '<div class="alert alert-warning" role="alert">Para comenzar seleccione en el menú los datos que desea consultar o pulse la opción de salir.</div>';
                 echo '<div class="text-center" style= "opacity: 0.4"><img src="../img/escudo.jpg" class="rounded" alt="imagen escudo IES Alandalus"></div>';

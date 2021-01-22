@@ -8,12 +8,13 @@
 
    if(isset($_POST["usuario"])){
 
+        
        if(($_POST["usuario"] == "") || ($_POST["password"] == "")){
            
             redireccionar("index.php?error=1");
-
-       }else{
-
+            
+        }else{
+            
             $usuario = htmlspecialchars($_POST["usuario"], ENT_QUOTES);
             $password = htmlspecialchars($_POST["password"], ENT_QUOTES);
 
@@ -47,7 +48,7 @@
             };
             };
         };
-};  
+}; 
 ?>
 <!DOCTYPE html>
 <html lang="es">

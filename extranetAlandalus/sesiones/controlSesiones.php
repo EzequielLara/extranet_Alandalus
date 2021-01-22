@@ -6,9 +6,10 @@
     include_once("../consultas.php");
     include_once("../funciones.php");
 
+    if($_GET["perfil"]&&$_GET["nombre"]){
     $nombre = $_GET["nombre"];
     $perfil = $_GET['perfil'];
-    
+    }else{header('location:../index.php');};
 ?>
 
 <!DOCTYPE html>
@@ -56,6 +57,7 @@
 
         //Tras recibir las variables de index.php podremos decidir que código incluir
 
+        
         if($_GET["perfil"]==="PROFESOR"){
             
             include("perfilProfesor.php");
@@ -65,6 +67,7 @@
             include("perfilAlumno.php");
 
         };
+        
         ?>
        
     </div>

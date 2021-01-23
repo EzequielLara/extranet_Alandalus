@@ -6,12 +6,12 @@
     include_once("../consultas.php");
     include_once("../funciones.php");
     
+    if(!isset($_SESSION['usuario'])){
+
+        header('location:destruirSesion.php');
+      }    
+
     
-
-    if($_SESSION == null){
-
-            header('location:../index.php');
-    };
 ?>
 
 <!DOCTYPE html>
@@ -40,10 +40,13 @@
             
             include("perfilProfesor.php");
 
-        }else{ 
+        }else if($_SESSION['usuario']['perfil']==="ALUMNO"){ 
 
             include("perfilAlumno.php");
 
+        }else{
+
+            redireccionar('destruirSesion.php');
         };
         
         ?>

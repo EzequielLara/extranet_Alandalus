@@ -1,4 +1,4 @@
-<!--Pppagina de inicio que muestra un formulario de acceso. Si se valida el acceso se nos redirigirá a controlSesiones.php.-->
+<!--Página de inicio que muestra un formulario de acceso. Si se valida el acceso se nos redirigirá a controlSesiones.php.-->
 
 <?php
     include("conexionesBD/config.php");
@@ -18,13 +18,13 @@
             $usuario = htmlspecialchars($_POST["usuario"], ENT_QUOTES);
             $password = htmlspecialchars($_POST["password"], ENT_QUOTES);
 
+            //Declaramos la session que contendrá los datos del usuario
             session_start();
     
             $_SESSION['usuario'] = array();
             
-            
-
-            //consultamos a la base de datos si los valores introducidos corresponden a un usuario con perfil de alumno o de profesor para redireccionar a controlSesiones.php con unas variables concretas u otras.
+        
+            //consultamos a la base de datos si los valores introducidos corresponden a un usuario con perfil de alumno o de profesor para redireccionar a controlSesiones.php.
 
             $consultaProfesor = "SELECT nombre FROM ies_profesor WHERE usuario = '".$usuario."' AND pass = '".$password."' LIMIT 0,1;";
 
@@ -35,7 +35,7 @@
              $profesor = $respuesta->fetch_object();
 
              if($profesor != null){
-
+                    //Inicilizamos la variable de sesion declarada con anterioridad con los datos del profesor y redireccionamos 
                     $_SESSION['usuario']['perfil'] = "PROFESOR";
                     $_SESSION['usuario']['nombre'] = $profesor->nombre;
 
@@ -47,7 +47,7 @@
                     $alumno = $respuesta->fetch_object();
 
                     if($alumno != null){
-
+                        //Inicilizamos la variable de sesion declarada con anterioridad con los datos del alumno y redireccionamos
                         $_SESSION['usuario']['perfil'] = "ALUMNO";
                         $_SESSION['usuario']['nombre'] = $alumno->nombre;
                         $_SESSION['usuario']['id'] = $alumno->id;
@@ -56,9 +56,12 @@
 
                         redireccionar("sesiones/controlSesiones.php");
                     }else{
-                    //Si el usuario introducido no existe en la BBDD redireccionamos nuevamente al formulario con un mesaje de error.
-                        session_destroy('usuario');
-                               
+                    //Si el usuario introducido no existe en la BBDD redireccionamos nuevamente al formulario con un mesaje de error pero antes destruimos las sesiones creadas que pudiesen haber.
+                        
+                        session_unset(); 
+                    
+                        session_destroy();
+                
                         redireccionar("index.php?error=2");
                     };
                 };       

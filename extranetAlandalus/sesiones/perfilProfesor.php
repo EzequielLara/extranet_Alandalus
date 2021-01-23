@@ -3,10 +3,16 @@
 <?php
  include("../conexionesBD/config.php");
  include("../conexionesBD/conexionbd.php");
+ 
 
 $cabeceras_alumnos = ["id", "usuario", "contraseña", "nombre", "apellidos", "teléfono", "email", "curso", "activo"];
 $cabeceras_cursos = ["id", "nombre"];
 $cabeceras_trimestres = ["id", "nombre", "evaluación", "orden"];
+
+if(!isset($_SESSION['usuario'])){
+
+ header('location:destruirSesion.php');
+}
 
 
 ?>
@@ -23,7 +29,7 @@ $cabeceras_trimestres = ["id", "nombre", "evaluación", "orden"];
               <a class="nav-link" href="controlSesiones.php?datos=trimestres">Trimestres</a>
           </li>
           <li class="nav-item">
-              <a class="nav-link" href="../index.php">Salir</a>
+              <a class="nav-link" href="destruirSesion.php">Salir</a>
           </li>
           <li style="text-align:right; width:40%">
           <?php

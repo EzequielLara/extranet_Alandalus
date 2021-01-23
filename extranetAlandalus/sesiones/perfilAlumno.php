@@ -4,6 +4,12 @@
 include("../conexionesBD/config.php");
 include('../conexionesBD/conexionbd.php');
 
+
+if(!isset($_SESSION['usuario'])){
+
+  header('location:destruirSesion.php');
+}
+
 //Arrays con los nombres de las cabeceras de las columnas de las distintas tablas que se mostrarán en pantalla.
 
 $cabeceras_alumnos = ["id", "usuario", "contraseña", "nombre", "apellidos", "teléfono", "email", "curso", "activo"];
@@ -24,7 +30,7 @@ $cabeceras_curso = ["id.curso", "curso"];
               <a class="nav-link" href="controlSesiones.php?opcion=curso">Curso</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../index.php">Salir</a>   
+            <a class="nav-link" href="destruirSesion.php">Salir</a>   
           </li>
       </ul>
     <table class="table">

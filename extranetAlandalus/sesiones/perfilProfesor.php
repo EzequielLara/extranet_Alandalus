@@ -67,7 +67,7 @@ if(!isset($_SESSION['usuario'])){
               if(isset($_GET["alta"])){
                
                 echo '
-                <form action="../alta.php?" method="POST">
+                <form action="../alta.php" method="POST">
                   <div class="form-group">
                     <label for="nombre">Nombre</label>
                     <input type="text" name="nombre" class="form-control" id="nombre"  placeholder="Escribir nombre" required>

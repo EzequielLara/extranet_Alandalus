@@ -39,7 +39,7 @@
                     $_SESSION['usuario']['perfil'] = "PROFESOR";
                     $_SESSION['usuario']['nombre'] = $profesor->nombre;
 
-                    redireccionar("sesiones/controlSesiones.php?");
+                    redireccionar("sesiones/controlSesiones.php");
             }else{
 
                 if($respuesta = $bd->query($consultaAlumno)){

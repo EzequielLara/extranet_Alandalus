@@ -12,6 +12,8 @@ $consultaTrimestres = $bd->query("SELECT * FROM ies_trimestres LIMIT 40");
 $consultaCursos = $bd->query( "SELECT * FROM ies_curso LIMIT 40");
 $consultaAsignaturas = $bd->query( "SELECT * FROM ies_asignatura LIMIT 40");
 
+session_start();
+
 
 //MOSTRAR LOS DATOS POR FILAS
 
@@ -53,7 +55,7 @@ function obtenerRegistrosEnColor($consulta, $numeroColumna, $valor, $colorFila){
       if($i == count($fila)&&($fila[$numeroColumna]!=$valor)){
 
         //Al pulsar botón redirecionamos la variable que identifica al alumno para poder realizar los cambios oportunos en la BBDD
-         echo '<td><a href="controlSesiones.php?datos=alumnos&nombre='.$_GET['nombre'].'&perfil=PROFESOR&id_Alumno='.$fila[0].'&apellidos='.$fila[4].'&nombre_Alumno='.$fila[3].'"><button type="button" class="btn btn-warning">Baja</button></a></td>';
+         echo '<td><a href="controlSesiones.php?datos=alumnos&nombre='.$_SESSION['usuario']['nombre'].'&perfil=PROFESOR&id_Alumno='.$fila[0].'&apellidos='.$fila[4].'&nombre_Alumno='.$fila[3].'"><button type="button" class="btn btn-warning">Baja</button></a></td>';
 
       };
 

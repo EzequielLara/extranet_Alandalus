@@ -5,7 +5,7 @@
     include("conexionesBD/conexionbd.php");
     include("funciones.php");
     
-
+  
    if(isset($_POST["usuario"])){
 
         
@@ -17,6 +17,12 @@
             
             $usuario = htmlspecialchars($_POST["usuario"], ENT_QUOTES);
             $password = htmlspecialchars($_POST["password"], ENT_QUOTES);
+
+            session_start();
+    
+            $_SESSION['usuario'] = array();
+            
+            
 
             //consultamos a la base de datos si los valores introducidos corresponden a un usuario con perfil de alumno o de profesor para redireccionar a controlSesiones.php con unas variables concretas u otras.
 
@@ -30,7 +36,10 @@
 
              if($profesor != null){
 
-                    redireccionar("sesiones/controlSesiones.php?nombre=".$profesor->nombre."&perfil=PROFESOR");
+                    $_SESSION['usuario']['perfil'] = "PROFESOR";
+                    $_SESSION['usuario']['nombre'] = $profesor->nombre;
+
+                    redireccionar("sesiones/controlSesiones.php?");
             }else{
 
                 if($respuesta = $bd->query($consultaAlumno)){
@@ -38,9 +47,17 @@
                     $alumno = $respuesta->fetch_object();
 
                     if($alumno != null){
-                            redireccionar("sesiones/controlSesiones.php?nombre=".$alumno->nombre."&perfil=ALUMNO&curso=".$alumno->curso."&id=".$alumno->id);
+
+                        $_SESSION['usuario']['perfil'] = "ALUMNO";
+                        $_SESSION['usuario']['nombre'] = $alumno->nombre;
+                        $_SESSION['usuario']['id'] = $alumno->id;
+                        $_SESSION['usuario']['curso'] = $alumno->curso;
+
+
+                        redireccionar("sesiones/controlSesiones.php");
                     }else{
-                    //Si el usuario introducido no existe en la BBDD redireccionamos nuevamente al formulario con un mesaje de error. 
+                    //Si el usuario introducido no existe en la BBDD redireccionamos nuevamente al formulario con un mesaje de error.
+                        session_destroy('usuario');
                                
                         redireccionar("index.php?error=2");
                     };

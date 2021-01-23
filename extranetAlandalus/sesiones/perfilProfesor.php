@@ -8,28 +8,29 @@ $cabeceras_alumnos = ["id", "usuario", "contraseña", "nombre", "apellidos", "te
 $cabeceras_cursos = ["id", "nombre"];
 $cabeceras_trimestres = ["id", "nombre", "evaluación", "orden"];
 
+
 ?>
 
 <!--Desde este menú accederemos a las distintas tablas. El paso de párametros es necesario para continuar mostrando al usuario su nombre y perfil-->
   <ul class="nav nav-tabs">
           <li class="nav-item">
-              <a class="nav-link" href="controlSesiones.php?datos=alumnos&nombre=<?php echo $_GET["nombre"]?>&perfil=<?php echo $_GET["perfil"]?>">Alumnos</a>
+              <a class="nav-link" href="controlSesiones.php?datos=alumnos">Alumnos</a>
           </li>
           <li class="nav-item">
-              <a class="nav-link" href="controlSesiones.php?datos=cursos&nombre=<?php echo $_GET["nombre"]?>&perfil=<?php echo $_GET["perfil"]?>">Cursos</a>
+              <a class="nav-link" href="controlSesiones.php?datos=cursos">Cursos</a>
           </li>
           <li class="nav-item">
-              <a class="nav-link" href="controlSesiones.php?datos=trimestres&nombre=<?php echo $_GET["nombre"]?>&perfil=<?php echo $_GET["perfil"]?>">Trimestres</a>
+              <a class="nav-link" href="controlSesiones.php?datos=trimestres">Trimestres</a>
           </li>
           <li class="nav-item">
               <a class="nav-link" href="../index.php">Salir</a>
           </li>
-          <li style="text-align:right; width:57%">
+          <li style="text-align:right; width:40%">
           <?php
               if(isset($_GET["datos"])){
                   if ($_GET["datos"] == "alumnos") {
 
-                     echo '<a href="controlSesiones.php?nombre='.$nombre.'&perfil=PROFESOR&alta=true"><button type="button" class="btn btn-outline-info" class="mx-right">NUEVA ALTA</button></a>';
+                     echo '<a href="controlSesiones.php?alta=true"><button type="button" class="btn btn-outline-info" class="mx-right">NUEVA ALTA</button></a>';
                   };                
               };
           ?>

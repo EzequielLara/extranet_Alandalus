@@ -1,0 +1,28 @@
+/*Estilos controlSesiones.php*/
+
+.contenedor{
+    width: 80%;
+    margin: auto;
+   
+    
+
+}
+
+td,th,tr{
+    text-align:center;
+    font-size: 15px;
+}
+header{
+
+    text-align: right;
+}
+.titulo{
+    width: 60%;
+    height:60px;
+    margin:auto;
+    margin-bottom:25px;
+    color:#8A99CF;
+    text-align:center;
+    font-size:2em;
+    
+}

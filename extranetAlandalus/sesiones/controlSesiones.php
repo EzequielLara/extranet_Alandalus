@@ -5,11 +5,13 @@
     include_once("../conexionesBD/conexionbd.php");
     include_once("../consultas.php");
     include_once("../funciones.php");
+    
+    
 
-    if($_GET["perfil"]&&$_GET["nombre"]){
-    $nombre = $_GET["nombre"];
-    $perfil = $_GET['perfil'];
-    }else{header('location:../index.php');};
+    if($_SESSION == null){
+
+            header('location:../index.php');
+    };
 ?>
 
 <!DOCTYPE html>
@@ -18,37 +20,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ExtranetAlandalus</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> 
+    <link rel="stylesheet" href="../estilos2.css" type="text/css"> 
 </head>
-<style>
-    .contenedor{
-        width: 60%;
-        margin: auto;
-
-    }
-    td,th,tr{
-        text-align:center;
-    }
-    header{
-
-        text-align: right;
-    }
-    .titulo{
-        width: 60%;
-        height:60px;
-        margin:auto;
-        margin-bottom:25px;
-        color:#8A99CF;
-        text-align:center;
-        font-size:2em;
-        
-    }
-    
-</style>
 <body>
-    <!--Los parámetros pasados por la barra de direcciones con el método GET serán de utilidad para mostrar al usuario su nombre y perfil con el que ha accedido en cada página que se le muestre-->
+   
 
-    <header><?php mostrarMensajeOK("1", $nombre, $perfil);?></header>
+    <header><?php mostrarMensajeOK("1", $_SESSION['usuario']['nombre'], $_SESSION['usuario']['perfil']);?></header>
 
     <div class="titulo">DATOS IES AL-ANDALUS</div>
     <div class="contenedor">
@@ -58,7 +36,7 @@
         //Tras recibir las variables de index.php podremos decidir que código incluir
 
         
-        if($_GET["perfil"]==="PROFESOR"){
+        if($_SESSION['usuario']['perfil']==="PROFESOR"){
             
             include("perfilProfesor.php");
 

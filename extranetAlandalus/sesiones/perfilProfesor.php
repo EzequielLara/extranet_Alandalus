@@ -3,7 +3,6 @@
 <?php
  include("../conexionesBD/config.php");
  include("../conexionesBD/conexionbd.php");
- 
 
 $cabeceras_alumnos = ["id", "usuario", "contraseña", "nombre", "apellidos", "teléfono", "email", "curso", "activo"];
 $cabeceras_cursos = ["id", "nombre"];
@@ -36,7 +35,13 @@ if(!isset($_SESSION['usuario'])){
               if(isset($_GET["datos"])){
                   if ($_GET["datos"] == "alumnos") {
 
-                     echo '<a href="controlSesiones.php?alta=true"><button type="button" class="btn btn-outline-info" class="mx-right">NUEVA ALTA</button></a>';
+                    //Solo a los profesores que sean tutores les aparecerá la opción a matricular alumnos
+
+                    if($_SESSION['usuario']['curso']>0){
+
+                      echo '<a href="controlSesiones.php?alta=true"><button type="button" class="btn btn-outline-info" class="mx-right">NUEVA ALTA</button></a>';
+                    };
+                    
                   };                
               };
           ?>
@@ -64,7 +69,19 @@ if(!isset($_SESSION['usuario'])){
               };
             }else{
               
+
               if(isset($_GET["alta"])){
+
+                if($_SESSION['usuario']['curso'] == 0){
+
+                  echo '<div class="mx-auto" style="width: 35rem;">
+                  <div class="card-body">
+                  <h5 class="card-header text-center">¡No tiene permisos para esta opción!</h5>
+                  </div>
+                  </div>';
+                  
+              
+                }else{
                
                 echo '
                 <form action="../alta.php" method="POST">
@@ -87,26 +104,10 @@ if(!isset($_SESSION['usuario'])){
                       <label for="telefono">Teléfono</label>
                       <input type="number" class="form-control" id="telefono" name="telefono">
                     </div>
-                    <div class="form-group col-md-4">
-                      <label for="curso">Curso</label>
-                      <select id="curso" name="curso" class="form-control" name="curso">
-                        <option selected>Identificadores de cursos</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                        <option>6</option>
-                        <option>7</option>
-                        <option>8</option>
-                        <option>9</option>
-                        <option>10</option>
-                      </select>
-                    </div>
                   </div>
                   <button type="submit" class="btn btn-primary">Dar de alta</button>
                 </form>';
-                
+                }; 
               }else{
 
               //Mientras no se muestren datos ni formularios añadiremos un mensaje y una imagen decorativa:
@@ -117,6 +118,7 @@ if(!isset($_SESSION['usuario'])){
                 echo '<div class="text-center" style= "opacity: 0.4"><img src="../img/escudo.jpg" class="rounded" alt="imagen escudo IES Alandalus"></div>';
               };
             };
+          
            
           ?>
         </tr>

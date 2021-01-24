@@ -55,7 +55,7 @@ function obtenerRegistrosEnColor($consulta, $numeroColumna, $valor, $colorFila){
       if($i == count($fila)&&($fila[$numeroColumna]!=$valor)){
 
         //Al pulsar botón redirecionamos la variable que identifica al alumno para poder realizar los cambios oportunos en la BBDD
-         echo '<td><a href="controlSesiones.php?datos=alumnos&nombre='.$_SESSION['usuario']['nombre'].'&perfil=PROFESOR&id_Alumno='.$fila[0].'&apellidos='.$fila[4].'&nombre_Alumno='.$fila[3].'"><button type="button" class="btn btn-warning">Baja</button></a></td>';
+         echo '<td><a href="controlSesiones.php?datos=alumnos&id_Alumno='.$fila[0].'&apellidos='.$fila[4].'&nombre_Alumno='.$fila[3].'"><button type="button" class="btn btn-warning">Baja</button></a></td>';
 
       };
 

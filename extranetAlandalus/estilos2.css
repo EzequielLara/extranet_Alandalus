@@ -3,9 +3,7 @@
 .contenedor{
     width: 80%;
     margin: auto;
-   
-    
-
+  
 }
 
 td,th,tr{
@@ -31,5 +29,6 @@ header{
     width: 30%;
     margin:right;
     text-align: center;
+    color:#8A99CF;
     
 }

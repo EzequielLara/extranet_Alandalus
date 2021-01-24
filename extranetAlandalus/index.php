@@ -18,7 +18,11 @@
             $usuario = htmlspecialchars($_POST["usuario"], ENT_QUOTES);
             $password = htmlspecialchars($_POST["password"], ENT_QUOTES);
 
-            //Declaramos la session que contendrá los datos del usuario
+            //Al estar los datos del password en la BBDD encriptados con la función md5() pasamos el valor de password, recibido del formulario, con la función md5 para poder compararlos en la base de datos.
+
+            $token = md5($password);
+
+            //Declaramos e inicializamos las sessiones que contendrán los datos del usuario
             session_start();
     
             $_SESSION['usuario'] = array();
@@ -28,9 +32,9 @@
         
             //consultamos a la base de datos si los valores introducidos corresponden a un usuario con perfil de alumno o de profesor para redireccionar a controlSesiones.php.
 
-            $consultaProfesor = "SELECT nombre FROM ies_profesor WHERE usuario = '".$usuario."' AND pass = '".$password."' LIMIT 0,1;";
+            $consultaProfesor = "SELECT nombre, tutor_curso FROM ies_profesor WHERE usuario = '".$usuario."' AND pass = '".$token."' LIMIT 0,1;";
 
-            $consultaAlumno = "SELECT nombre, id, curso FROM ies_alumno WHERE usuario = '".$usuario."' AND pass = '".$password."' LIMIT 0,1;";
+            $consultaAlumno = "SELECT nombre, id, curso, apellidos FROM ies_alumno WHERE usuario = '".$usuario."' AND pass = '".$token."' LIMIT 0,1;";
 
             if($respuesta = $bd->query($consultaProfesor)){
 
@@ -40,6 +44,8 @@
                     //Inicilizamos la variable de sesion declarada con anterioridad con los datos del profesor y redireccionamos 
                     $_SESSION['usuario']['perfil'] = "PROFESOR";
                     $_SESSION['usuario']['nombre'] = $profesor->nombre;
+                    $_SESSION['usuario']['curso'] = $profesor->tutor_curso;
+                    
 
                     redireccionar("sesiones/controlSesiones.php");
             }else{
@@ -52,11 +58,13 @@
                         //Inicilizamos la variable de sesion declarada con anterioridad con los datos del alumno y redireccionamos
                         $_SESSION['usuario']['perfil'] = "ALUMNO";
                         $_SESSION['usuario']['nombre'] = $alumno->nombre;
+                        $_SESSION['usuario']['apellidos'] = $alumno->apellidos;
                         $_SESSION['usuario']['id'] = $alumno->id;
                         $_SESSION['usuario']['curso'] = $alumno->curso;
 
 
                         redireccionar("sesiones/controlSesiones.php");
+
                     }else{
                     //Si el usuario introducido no existe en la BBDD redireccionamos nuevamente al formulario con un mesaje de error pero antes destruimos las sesiones creadas que pudiesen haber.
                         

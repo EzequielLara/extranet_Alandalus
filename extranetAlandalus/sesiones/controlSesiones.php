@@ -9,9 +9,8 @@
     if(!isset($_SESSION['usuario'])){
 
         header('location:destruirSesion.php');
-      }    
-
-    
+      };      
+      
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +25,7 @@
 <body>
    
 
-    <header><?php mostrarMensajeOK("1", $_SESSION['usuario']['nombre'], $_SESSION['usuario']['perfil']);?></header>
+    <header><?php echo '<div class="horayfecha">Fecha: '.$_SESSION['fecha'].' '.'Hora de acceso: '.$_SESSION['hora'].'</div>'; mostrarMensajeOK("1", $_SESSION['usuario']['nombre'], $_SESSION['usuario']['perfil']); ?></header>
 
     <div class="titulo">DATOS IES AL-ANDALUS</div>
     <div class="contenedor">

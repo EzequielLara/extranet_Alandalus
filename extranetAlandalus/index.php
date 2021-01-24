@@ -4,8 +4,8 @@
     include("conexionesBD/config.php");
     include("conexionesBD/conexionbd.php");
     include("funciones.php");
-    
-  
+   
+ 
    if(isset($_POST["usuario"])){
 
         
@@ -22,6 +22,8 @@
             session_start();
     
             $_SESSION['usuario'] = array();
+            $_SESSION['hora'] = date("H:i:s"); 
+            $_SESSION['fecha'] = date("d/m/y");
             
         
             //consultamos a la base de datos si los valores introducidos corresponden a un usuario con perfil de alumno o de profesor para redireccionar a controlSesiones.php.

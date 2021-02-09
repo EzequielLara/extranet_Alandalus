@@ -11,7 +11,8 @@ $cabeceras_trimestres = ["id", "nombre", "evaluación", "orden"];
 if(!isset($_SESSION['usuario'])){
 
  header('location:destruirSesion.php');
-}
+ 
+};
 
 
 ?>
@@ -37,7 +38,7 @@ if(!isset($_SESSION['usuario'])){
 
                     //Solo a los profesores que sean tutores les aparecerá la opción a matricular alumnos
 
-                    if($_SESSION['usuario']['curso']>0){
+                    if($_SESSION['usuario']['perfil']='PROFESOR'){
 
                       echo '<a href="controlSesiones.php?alta=true"><button type="button" class="btn btn-outline-info" class="mx-right">NUEVA ALTA</button></a>';
                     };

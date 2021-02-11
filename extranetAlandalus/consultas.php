@@ -41,13 +41,13 @@ function obtenerRegistrosEnColor($consulta, $numeroColumna, $valor, $colorFila){
     $i=0;
     while($i<count($fila)){
 
-      if($fila[$numeroColumna]==$valor){
+      if($fila[$numeroColumna]==$valor&&($i != 2)){
 
-          echo"<td style=background-color:$colorFila>$fila[$i]</td>";
+          echo"<td style=color:$colorFila>$fila[$i]</td>";
 
       }else{
-        
-          echo"<td>$fila[$i]</td>";     
+          if($i != 2){
+          echo"<td class='text-muted' style='vertical-align:middle;'>$fila[$i]</td>"; };    
       };
 
       $i++;
@@ -55,7 +55,7 @@ function obtenerRegistrosEnColor($consulta, $numeroColumna, $valor, $colorFila){
       if($i == count($fila)&&($fila[$numeroColumna]!=$valor)){
 
         //Al pulsar botón redirecionamos la variable que identifica al alumno para poder realizar los cambios oportunos en la BBDD
-         echo '<td><a href="controlSesiones.php?datos=alumnos&id_Alumno='.$fila[0].'&apellidos='.$fila[4].'&nombre_Alumno='.$fila[3].'"><button type="button" class="btn btn-warning">Baja</button></a></td>';
+         echo '<td><a href="controlSesiones.php?datos=alumnos&id_Alumno='.$fila[0].'&apellidos='.$fila[4].'&nombre_Alumno='.$fila[3].'"><button type="button" class="btn btn-outline-info" style="margin:auto">x</button></a></td>';
 
       };
 

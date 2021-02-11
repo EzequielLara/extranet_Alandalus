@@ -17,7 +17,7 @@ function redireccionar($url) {
 function mostrarMensajeOK($msg, $usuario, $perfil) {
 	// Función para mostrar los mensajes de Información al usuario
     if($msg>0&&$msg<10) {
-        $mensaje[1]="$usuario, ha accedido a la extranet del <span style='color: blue;'>IES AL-ANDALUS</span> con el perfíl de <span style='color: blue;'>$perfil </span>*";
+        $mensaje[1]="$usuario, acaba de acceder a <span style='color: blue;'>IES AL-ANDALUS</span> con el perfíl de <span style='color: blue;'>$perfil </span>*";
         $mensaje[2]="La información se ha guardado correctamente.";
         $mensaje[3]="El comentario se ha guardado correctamente.";
         $mensaje[4]="El comentario sobre el alumno se ha guardado correctamente.";

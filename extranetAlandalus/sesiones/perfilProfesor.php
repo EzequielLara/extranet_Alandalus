@@ -4,7 +4,7 @@
  include("../conexionesBD/config.php");
  include("../conexionesBD/conexionbd.php");
 
-$cabeceras_alumnos = ["id", "usuario", "contraseña", "nombre", "apellidos", "teléfono", "email", "curso", "activo"];
+$cabeceras_alumnos = ["id", "usuario", "nombre", "apellidos", "tlf", "email", "curso", "activo", "baja"];
 $cabeceras_cursos = ["id", "nombre"];
 $cabeceras_trimestres = ["id", "nombre", "evaluación", "orden"];
 
@@ -18,20 +18,9 @@ if(!isset($_SESSION['usuario'])){
 ?>
 
 <!--Desde este menú accederemos a las distintas tablas. El paso de párametros es necesario para continuar mostrando al usuario su nombre y perfil-->
-  <ul class="nav nav-tabs">
-          <li class="nav-item">
-              <a class="nav-link" href="controlSesiones.php?datos=alumnos">Alumnos</a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link" href="controlSesiones.php?datos=cursos">Cursos</a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link" href="controlSesiones.php?datos=trimestres">Trimestres</a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link" href="destruirSesion.php">Salir</a>
-          </li>
-          <li style="text-align:right; width:40%">
+<ul class="nav nav-tabs">
+        
+        <li style="nav-item ">
           <?php
               if(isset($_GET["datos"])){
                   if ($_GET["datos"] == "alumnos") {
@@ -40,17 +29,19 @@ if(!isset($_SESSION['usuario'])){
 
                     if($_SESSION['usuario']['perfil']='PROFESOR'){
 
-                      echo '<a href="controlSesiones.php?alta=true"><button type="button" class="btn btn-outline-info" class="mx-right">NUEVA ALTA</button></a>';
+                      echo '<a href="controlSesiones.php?alta=true"><button type="button" class="btn btn-outline-info">NUEVA ALTA</button></a>';
                     };
                     
                   };                
               };
           ?>
-          </li>
+        </li>
       </ul>
-     
-    <table class="table">
-      <thead>
+      <div style="height:30px;"></div>
+
+    <div class="table-responsive-sm"> 
+     <table class="table table-sm table-hover table-borderless">
+      <thead class="thead-light">
         <tr>
           <?php
 
@@ -77,7 +68,7 @@ if(!isset($_SESSION['usuario'])){
 
                   echo '<div class="mx-auto" style="width: 35rem;">
                   <div class="card-body">
-                  <h5 class="card-header text-center">¡No tiene permisos para esta opción!</h5>
+                  <h5 class="card-header text-center">¡No tiene permisos para esta opción al no ser profesor tutor!</h5>
                   </div>
                   </div>';
                   
@@ -113,10 +104,7 @@ if(!isset($_SESSION['usuario'])){
 
               //Mientras no se muestren datos ni formularios añadiremos un mensaje y una imagen decorativa:
                 echo "</br>";
-                echo '<div class="alert alert-warning" role="alert">
-                Para comenzar seleccione en el menú los datos que desea consultar o pulse la opción de salir.
-              </div>';
-                echo '<div class="text-center" style= "opacity: 0.4"><img src="../img/escudo.jpg" class="rounded" alt="imagen escudo IES Alandalus"></div>';
+                echo '<div class="text-center"><img src="../img/escudo.jpg" class="rounded" alt="imagen escudo IES Alandalus"></div>';
               };
             };
           
@@ -135,7 +123,7 @@ if(!isset($_SESSION['usuario'])){
                   
                   include("../baja.php");
                 }else{
-                 obtenerRegistrosEnColor($consultaAlumnos, 8, 0, "#E89A8A");
+                 obtenerRegistrosEnColor($consultaAlumnos, 8, 0, "#56C3C5");
 
                };
                   
@@ -152,5 +140,7 @@ if(!isset($_SESSION['usuario'])){
           ?>
       </tr>
     </tbody>
-  </table>
+   </table>
+  </div>
+  
 

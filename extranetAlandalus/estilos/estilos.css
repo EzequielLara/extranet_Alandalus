@@ -1,9 +1,8 @@
 /*estilos index.php*/
-
-.content{
-    width: 30%;
+#conte{
+    position: relative; 
     margin: auto;
-    text-align: center;
+  
 }
 .formulario{
     text-align: left;

@@ -40,7 +40,7 @@ if(!isset($_SESSION['usuario'])){
       <div style="height:30px;"></div>
 
     <div class="table-responsive-sm"> 
-     <table class="table table-sm table-hover table-borderless">
+     <table class="table table-sm table-hover table-borderless" class="table align-middle">
       <thead class="thead-light">
         <tr>
           <?php
@@ -113,7 +113,7 @@ if(!isset($_SESSION['usuario'])){
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr class="text-center">
           <?php
 
           if(isset($_GET["datos"])){
@@ -129,11 +129,11 @@ if(!isset($_SESSION['usuario'])){
                   
                 } elseif ($_GET["datos"] == "cursos") {
                   
-                  obtenerRegistros($consultaCursos);
+                  obtenerRegistros($consultaCursos,8);
 
                 } elseif ($_GET["datos"] == "trimestres") {
                   
-                  obtenerRegistros($consultaTrimestres);
+                  obtenerRegistros($consultaTrimestres,8);
               }
           }
 

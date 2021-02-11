@@ -21,7 +21,7 @@ $datos=$bd->query($numeroRegistros);
 $ultimoRegistro = $datos->fetch_object();
 
 $ultimo = intval($ultimoRegistro->ultimo);
-$proximo =$ultimo + 3; //El primer registro de la BBDD comienza en 2 así que sumamos tres para obtener el consecutivo al último registro
+$proximo =$ultimo + 4; //El primer registro de la BBDD comienza en 2 así que sumamos tres para obtener el consecutivo al último registro
 
 //REALIZAMOS LA INSERCIÓN DE DATOS EN LA BBDD
 $altaAlumno = "INSERT INTO ies_alumno VALUES ($proximo, concat(concat('@','$nombre'),$proximo), '25d55ad283aa400af464c76d713c07ad', '$nombre', '$apellidos', $telefono, '$email', $curso, 1)";

@@ -92,27 +92,31 @@
     <link rel="stylesheet" href="estilos/estilos.css" type="text/css">
     
 </head>
-<body>
-    <div class="content">
-        <div style="margin:40px"></div>
-        
-        <img src="img/escudo.jpg" width="250" height="250" alt="imagen escudo IES Alandalus">
-        <h5><b>Iniciar sesión</b></h5>
-        <?php
-         if(isset($_GET["error"])){mostrarMensajeERR($_GET["error"]);};
-         ?>
-        <form class="formulario" action="index.php" method="POST">
-            <div class="form-group">
-                <label><b>Usuario:</b></label>
-                <input  type="nombre" name="usuario" class="form-control" placeholder="Usuario" required>
+<body style="background-color:#99D6DD">
+    <div  style=' margin-top:30px;'>
+        <div id="conte" class="card bg-light" style="width: 25rem; box-shadow: 7px 10px 8px 2px #90B6BA">
+            
+            <img src="img/escudo.jpg" style="margin:auto; margin-top:30px" width="250px" height="250px" alt="imagen escudo IES Alandalus">
+            <div class="card-body">
+                <h4 class="card-title"><b>Iniciar sesión</b></h4>
+                <?php
+                if(isset($_GET["error"])){mostrarMensajeERR($_GET["error"]);};
+                ?>
+                <form class="formulario" action="index.php" method="POST">
+                    <div class="form-group">
+                        <label><b>Usuario:</b></label>
+                        <input  type="nombre" name="usuario" class="form-control" placeholder="Usuario" required>
+                    </div>
+                    <div class="form-group">
+                        <label><b>Contraseña:</b></label>
+                        <input type="password" name="password" class="form-control" placeholder="Contraseña" required>  
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                    
+                </form>
             </div>
-            <div class="form-group">
-                <label><b>Contraseña:</b></label>
-                <input type="password" name="password" class="form-control" placeholder="Contraseña" required>  
-            </div>
-            <button type="submit" class="btn btn-primary">Enviar</button>
-        </form>
-        
-    </div>   
+        </div>
+    </div>    
+       
 </body>
 </html>

@@ -63,7 +63,7 @@
     <div class="row">
         <div class="col">
             <div class="alert" role="alert">
-              <p class="text-secondary">USUARIO: <?php echo $_SESSION['usuario']['nombre'];?></p>
+              <p class="text-secondary">USUARIO: <?php echo $_SESSION['usuario']['usuario'];?></p>
                </div>
             </div>
             <div class="col">

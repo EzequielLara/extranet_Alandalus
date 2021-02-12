@@ -32,9 +32,9 @@
         
             //consultamos a la base de datos si los valores introducidos corresponden a un usuario con perfil de alumno o de profesor para redireccionar a controlSesiones.php.
 
-            $consultaProfesor = "SELECT nombre, tutor_curso FROM ies_profesor WHERE usuario = '".$usuario."' AND pass = '".$token."' LIMIT 0,1;";
+            $consultaProfesor = "SELECT nombre, usuario, tutor_curso FROM ies_profesor WHERE usuario = '".$usuario."' AND pass = '".$token."' LIMIT 0,1;";
 
-            $consultaAlumno = "SELECT nombre, id, curso, apellidos FROM ies_alumno WHERE usuario = '".$usuario."' AND pass = '".$token."' LIMIT 0,1;";
+            $consultaAlumno = "SELECT nombre,usuario, id, curso, apellidos FROM ies_alumno WHERE usuario = '".$usuario."' AND pass = '".$token."' LIMIT 0,1;";
 
             if($respuesta = $bd->query($consultaProfesor)){
 
@@ -45,6 +45,7 @@
                     $_SESSION['usuario']['perfil'] = "PROFESOR";
                     $_SESSION['usuario']['nombre'] = $profesor->nombre;
                     $_SESSION['usuario']['curso'] = $profesor->tutor_curso;
+                    $_SESSION['usuario']['usuario'] = $profesor->usuario;
                     
 
                     redireccionar("sesiones/controlSesiones.php");
@@ -61,6 +62,7 @@
                         $_SESSION['usuario']['apellidos'] = $alumno->apellidos;
                         $_SESSION['usuario']['id'] = $alumno->id;
                         $_SESSION['usuario']['curso'] = $alumno->curso;
+                        $_SESSION['usuario']['usuario'] = $alumno->usuario;
 
 
                         redireccionar("sesiones/controlSesiones.php");
@@ -98,7 +100,7 @@
             
             <img src="img/escudo.jpg" style="margin:auto; margin-top:30px" width="250px" height="250px" alt="imagen escudo IES Alandalus">
             <div class="card-body">
-                <h4 class="card-title"><b>Iniciar sesión</b></h4>
+                <h4 class="text-center"><b>Iniciar sesión</b></h4>
                 <?php
                 if(isset($_GET["error"])){mostrarMensajeERR($_GET["error"]);};
                 ?>

@@ -77,26 +77,27 @@ if(!isset($_SESSION['usuario'])){
                
                 echo '
                 <form action="../alta.php" method="POST">
-                  <div class="form-group">
+                <div class="form-row">
+                  <div class="form-group col-md-6">
                     <label for="nombre">Nombre</label>
                     <input type="text" name="nombre" class="form-control" id="nombre"  placeholder="Escribir nombre" required>
                   </div>
-                  <div class="form-group">
+                  <div class="form-group col-md-6">
                     <label for="apellidos">Apellidos</label>
                     <input type="text" class="form-control" id="apellidos" name="apellidos" placeholder="Escribir apellidos completos" required>
                   </div>
-                  <div class="form-row">
+                </div>
+                  
+                <div class="form-row">
                     <div class="form-group col-md-6">
                       <label for="email">Email</label>
                       <input type="email" class="form-control" name="email" id="email name="email">
                     </div>
-                  </div>
-                  <div class="form-row">
                     <div class="form-group col-md-6">
                       <label for="telefono">Teléfono</label>
                       <input type="number" class="form-control" id="telefono" name="telefono">
                     </div>
-                  </div>
+                </div>
                   <button type="submit" class="btn btn-primary">Dar de alta</button>
                 </form>';
                 }; 

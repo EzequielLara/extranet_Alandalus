@@ -1,5 +1,5 @@
 <li class="nav-item">
-    <a class="nav-link <?php if($_GET['datos']=='alumnos'){echo 'active';}?>" aria-current="page" href="controlSesiones.php?datos=alumnos">Alumnos</a>
+    <a class="nav-link <?php if($_GET['datos']=='alumnos'){echo 'active';}?>" aria-current="page" href="controlSesiones.php?datos=alumnos&pagina=1">Alumnos</a>
 </li>
 <li class="nav-item">
     <a class="nav-link <?php if($_GET['datos']=='cursos'){echo 'active';}?>" href="controlSesiones.php?datos=cursos">Cursos</a>

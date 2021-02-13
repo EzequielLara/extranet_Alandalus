@@ -1,8 +1,9 @@
-<!--Este archivo muestra menú que redirige a distintos datos de la BBDD y los muestra en forma de tabla-->
+<!--Este archivo muestra menú NAV que redirige a distintos datos de la BBDD y los muestra en forma de tabla, si se pulsa en 'alumnos' se añadirá un botón de acceso a un formulario para dar de alta a nuevos alumnos. Solo se podrá usar si el profesor es tutor de algún módulo-->
 
 <?php
  include("../conexionesBD/config.php");
  include("../conexionesBD/conexionbd.php");
+ 
 
 $cabeceras_alumnos = ["id", "usuario", "nombre", "apellidos", "tlf", "email", "curso", "activo", "baja"];
 $cabeceras_cursos = ["id", "nombre"];
@@ -17,7 +18,7 @@ if(!isset($_SESSION['usuario'])){
 
 ?>
 
-<!--Desde este menú accederemos a las distintas tablas. El paso de párametros es necesario para continuar mostrando al usuario su nombre y perfil-->
+<!--Desde este menú accederemos a las distintas tablas.-->
 <ul class="nav nav-tabs">
         
         <li style="nav-item ">
@@ -66,15 +67,15 @@ if(!isset($_SESSION['usuario'])){
 
                 if($_SESSION['usuario']['curso'] == 0){
 
+                  /*SI NO ES UN PROFESOR TUTOR SE IMPRIME ESTE ROTULO*/ 
                   echo '<div class="mx-auto" style="width: 35rem;">
                   <div class="card-body">
                   <h5 class="card-header text-center">¡No tiene permisos para esta opción al no ser profesor tutor!</h5>
                   </div>
                   </div>';
-                  
-              
+
                 }else{
-               
+                /*FORMULARIO DE NUEVA ALTA*/ 
                 echo '
                 <form action="../alta.php" method="POST">
                 <div class="form-row">
@@ -108,14 +109,15 @@ if(!isset($_SESSION['usuario'])){
                 echo '<div class="text-center"><img src="../img/escudo.jpg" class="rounded" alt="imagen escudo IES Alandalus"></div>';
               };
             };
-          
-           
+
           ?>
         </tr>
       </thead>
       <tbody>
         <tr class="text-center">
           <?php
+
+          /*PINTAMOS LOS DATOS DE LA BBDD DEPENDIENDO DEL ELEMENTO DEL NAV SELECCIONADO*/
 
           if(isset($_GET["datos"])){
               if ($_GET["datos"] == "alumnos") {
@@ -124,15 +126,44 @@ if(!isset($_SESSION['usuario'])){
                   
                   include("../baja.php");
                 }else{
-                 obtenerRegistrosEnColor($consultaAlumnos, 8, 0, "#56C3C5");
+                                   
+                  /*--------------------PAGINACIÓN------------------------*/
 
-               };
+                 if($_GET['pagina']){
+                
+                  $numeroRegistros = mysqli_num_rows($consultaAlumnos);
+                  $numeroRegistrosPorPagina = 20;
+                  $numeroBotonesPaginacion = ceil($numeroRegistros/$numeroRegistrosPorPagina);
+                  
+                  if(($_GET['pagina']>$numeroBotonesPaginacion)||($_GET['pagina']<1)){ 
+
+                  
+                    header('location: ../sesiones/controlSesiones.php?datos=alumnos&pagina=1');
+                  };
+                
+                  $iniciar = ($_GET['pagina']-1)*$numeroRegistrosPorPagina;
+                  
+                  //FALTA CONSULTA PREPARADA PARA DAR USO A LA PAGINACIÓN
+
+              
+                  
+                 
+                  obtenerRegistrosEnColor($consultaAlumnos, 8, 0, "#56C3C5");
+                  
+                 
+                  
+
+                    include('paginacion.php');
+                  }
+                };
+               
+                /*-------------------FIN PAGINACIÓN--------------------------------*/
                   
                 } elseif ($_GET["datos"] == "cursos") {
                   
                   obtenerRegistros($consultaCursos,8);
 
-                } elseif ($_GET["datos"] == "trimestres") {
+                } elseif ($_GET["datos"] == "trimestres"){
                   
                   obtenerRegistros($consultaTrimestres,8);
               }
@@ -143,5 +174,6 @@ if(!isset($_SESSION['usuario'])){
     </tbody>
    </table>
   </div>
-  
+
+
 

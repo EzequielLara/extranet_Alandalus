@@ -142,13 +142,42 @@ if(!isset($_SESSION['usuario'])){
                   };
                 
                   $iniciar = ($_GET['pagina']-1)*$numeroRegistrosPorPagina;
-                  
-                  //FALTA CONSULTA PREPARADA PARA DAR USO A LA PAGINACIÓN
+                  $final = $numeroRegistrosPorPagina;
 
-              
                   
-                 
-                  obtenerRegistrosEnColor($consultaAlumnos, 8, 0, "#56C3C5");
+                  
+                  //CONSULTA PREPARADA PARA DAR USO A LA PAGINACIÓN
+
+                    $sql = "SELECT * FROM ies_alumno LIMIT ?,?";
+                    $stmt=$bd->prepare($sql);
+                    $stmt->bind_param("ii", $iniciar, $final);
+                    $stmt->execute();
+
+                    $rs = mysqli_stmt_bind_result($stmt, $id, $usuario, $pass, $nombre, $apellidos, $telefono, $email, $curso, $activo);
+                    $stmt->store_result();
+                    
+                    while((mysqli_stmt_fetch($stmt))){
+
+                      echo "<tr>";
+                  
+                      for($i=0; $i<1;$i++){
+                        
+                          echo "<td>$id</td>";
+                          echo "<td>$usuario</td>";
+                          echo "<td>$nombre</td>";
+                          echo "<td>$apellidos</td>";
+                          echo "<td>$telefono</td>";
+                          echo "<td>$email</td>";
+                          echo "<td>$curso</td>";
+                          echo "<td>$activo</td>";
+                      
+                      };
+                    };
+                      echo"</tr>";
+
+                    mysqli_stmt_close($stmt);
+
+                 //obtenerRegistrosEnColor($consultaAlumnos, 8, 0, "#56C3C5");
                   
                  
                   

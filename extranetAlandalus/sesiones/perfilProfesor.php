@@ -3,7 +3,8 @@
 <?php
  include("../conexionesBD/config.php");
  include("../conexionesBD/conexionbd.php");
- 
+ require_once('../autoload.php');
+ autoload(null);
 
 $cabeceras_alumnos = ["id", "usuario", "nombre", "apellidos", "tlf", "email", "curso", "activo", "baja"];
 $cabeceras_cursos = ["id", "nombre"];
@@ -161,15 +162,31 @@ if(!isset($_SESSION['usuario'])){
                       echo "<tr>";
                   
                       for($i=0; $i<1;$i++){
+
+                        if($activo==1){
                         
-                          echo "<td>$id</td>";
-                          echo "<td>$usuario</td>";
-                          echo "<td>$nombre</td>";
-                          echo "<td>$apellidos</td>";
-                          echo "<td>$telefono</td>";
-                          echo "<td>$email</td>";
-                          echo "<td>$curso</td>";
-                          echo "<td>$activo</td>";
+                          echo "<td style=color:'#56C3C5'>$id</td>";
+                          echo "<td style=color:'#56C3C5'>$usuario</td>";
+                          echo "<td style=color:'#56C3C5'>$nombre</td>";
+                          echo "<td style=color:'#56C3C5'>$apellidos</td>";
+                          echo "<td style=color:'#56C3C5'>$telefono</td>";
+                          echo "<td style=color:'#56C3C5'>$email</td>";
+                          echo "<td style=color:'#56C3C5'>$curso</td>";
+                          echo "<td style=color:'#56C3C5'>$activo</td>";
+                          echo '<td ><a href="controlSesiones.php?datos=alumnos&id_Alumno='.$id.'&apellidos='.$apellidos.'&nombre_Alumno='.$nombre.'"><button type="button" class="btn btn-outline-info" style="margin:auto">x</button></a></td>';
+                        }else{
+
+                          echo "<td class='text-muted' style='vertical-align:middle;'>$id</td>";
+                          echo "<td class='text-muted' style='vertical-align:middle;'>$usuario</td>";
+                          echo "<td class='text-muted' style='vertical-align:middle;'>$nombre</td>";
+                          echo "<td class='text-muted' style='vertical-align:middle;'>$apellidos</td>";
+                          echo "<td class='text-muted' style='vertical-align:middle;'>$telefono</td>";
+                          echo "<td class='text-muted' style='vertical-align:middle;'>$email</td>";
+                          echo "<td class='text-muted' style='vertical-align:middle;'>$curso</td>";
+                          echo "<td class='text-muted' style='vertical-align:middle;'>$activo</td>";
+
+
+                        }
                       
                       };
                     };
@@ -183,18 +200,59 @@ if(!isset($_SESSION['usuario'])){
                   
 
                     include('paginacion.php');
-                  }
+                  };
                 };
                
                 /*-------------------FIN PAGINACIÓN--------------------------------*/
                   
                 } elseif ($_GET["datos"] == "cursos") {
                   
-                  obtenerRegistros($consultaCursos,8);
+                  if($consultaCursos){
+                
+                    while($consultaCurso = $consultaCursos->fetch_object()){
+    
+                      $Cursos[] = new Curso($consultaCurso->id, $consultaCurso->nombre);
+                      
+                    };
+                    mysqli_free_result($consultaCursos);
+    
+                    
+    
+                  };
+                  foreach ($Cursos as $curso) {
+                 
+                    echo "<tr>";
+  
+                      $curso->listarDatosId();
+                      $curso->listarDatosNombre();
+                    
+                    echo "</tr>";
+                  };
+                  
 
                 } elseif ($_GET["datos"] == "trimestres"){
                   
-                  obtenerRegistros($consultaTrimestres,8);
+                  if($consultaTrimestres){
+                
+                    while($consultaTrimestre = $consultaTrimestres->fetch_object()){
+    
+                      $trimestres[] = new Trimestre($consultaTrimestre->id, $consultaTrimestre->nombre, $consultaTrimestre->nombre2, $consultaTrimestre->orden,);
+                      
+                    };
+                    mysqli_free_result($consultaTrimestres);
+    
+                    
+    
+                  };
+                  foreach ($trimestres as $trimestre) {
+                 
+                    echo "<tr>";
+  
+                     $trimestre->listarDatosEnPantalla();
+                    
+                    echo "</tr>";
+                  };
+                  
               }
           }
 

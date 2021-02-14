@@ -3,6 +3,9 @@
 
 include("../conexionesBD/config.php");
 include('../conexionesBD/conexionbd.php');
+require_once('../autoload.php');
+autoload(null);
+
 
 
 if(!isset($_SESSION['usuario'])){
@@ -26,14 +29,45 @@ $cabeceras_curso = ["id.curso", "curso"];
 
           //CONSULTAS (dinámicas) DEL PERFIL DE ALUMNO (cada alumno obtendrá resultados diferentes)
 
-            $id =intval($_SESSION['usuario']['id']);
-            $nombre = $_SESSION['usuario']['nombre'];
-            $curso = intval($_SESSION['usuario']['curso']);
+            $idAlumno =intval($_SESSION['usuario']['id']);
+            $nombreAlumno = $_SESSION['usuario']['nombre'];
+            $cursoAlumno = intval($_SESSION['usuario']['curso']);
             
 
-            $consAlumno= $bd->query( "SELECT * FROM ies_alumno WHERE id = $id");
-            $consAsignaturas= $bd->query( "SELECT * FROM ies_asignatura WHERE curso = $curso");
-            $consCurso= $bd->query( "SELECT * FROM ies_curso WHERE id = $curso");
+            if($consAlumnos= $bd->query( "SELECT * FROM ies_alumno WHERE id = $idAlumno LIMIT 0,1")){
+              //Consultamos los datos del alumno a la BBDD
+              $consAlumno = $consAlumnos->fetch_object();
+              mysqli_free_result($consAlumnos);
+              
+              //Cargamos el curso del Alumno
+              if($consCursos= $bd->query( "SELECT * FROM ies_curso WHERE id = $cursoAlumno")){
+                
+                $consCurso =$consCursos->fetch_object();
+                $curso = new Curso($consCurso->id, $consCurso->nombre);
+                mysqli_free_result($consCursos);
+
+               };
+
+              //Cargamos las asignaturas del Alumno
+              
+              if($consAsignaturas= $bd->query( "SELECT * FROM ies_asignatura WHERE curso = $cursoAlumno")){
+                
+                while($consAsignatura =$consAsignaturas->fetch_object()){
+
+                  $Asignaturas[] = new Asignatura($consAsignatura->id, $consAsignatura->nombre, $consAsignatura->nombre_corto);
+                  
+                };
+                mysqli_free_result($consAsignaturas);
+
+                
+
+              };
+
+              //Creamos la instancia de la clase Alumno
+
+              $alumno = new Alumno ($consAlumno->id, $consAlumno->usuario, $consAlumno->pass, $consAlumno->nombre, $consAlumno->apellidos, $consAlumno->telefono, $consAlumno->email, $curso, $consAlumno->activo, $Asignaturas);
+            }
+            
 
             if(isset($_GET["opcion"])){
 
@@ -70,15 +104,34 @@ $cabeceras_curso = ["id.curso", "curso"];
           //MOSTRAMOS EL CONTENIDO DE LAS CONSULTAS
               if ($_GET["opcion"] == "alumnos") {
                 
-                obtenerRegistros($consAlumno, 2); // Estas funciones las encontraremos en consultas.php
+                echo "<tr>";
+
+                  $alumno->listarDatosEnPantalla(); // Estas funciones las encontraremos en consultas.php
+
+                echo "</tr>";
                   
               } elseif ($_GET["opcion"] == "asignaturas") {
+                 
+                foreach ($Asignaturas as $asignatura) {
+                 
+                  echo "<tr>";
+
+                    $asignatura->listarDatosEnPantalla();
+                    $curso->ListarDatosId();
                   
-                obtenerRegistros($consAsignaturas, 8);
+                  echo "</tr>";
+                };
+                
+            
 
               } elseif ($_GET["opcion"] == "curso") {
                 
-                obtenerRegistros($consCurso,8);
+                echo "<tr>";
+                
+                  $curso->listarDatosId();
+                  $curso->listarDatosNombre();
+
+                echo "</tr>";
               };
             };
 

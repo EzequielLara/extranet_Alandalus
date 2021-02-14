@@ -18,20 +18,7 @@ session_start();
 
 //MOSTRAR LOS DATOS POR FILAS
 
-function obtenerRegistros($consulta, $eliminarColumna){
 
-    while(($fila=mysqli_fetch_row($consulta))){
-        echo "<tr>";
-
-        for($i=0; $i<count($fila);$i++){
-          if($i!==$eliminarColumna){
-            echo "<td>$fila[$i]</td>";
-          };  
-        };
-    };
-    echo "</tr>";
-    
-};
 
 //MOSTRAR LOS DATOS POR FILAS PERO DANDO COLOR A CUYAS FILAS COINCIDAN CON EL VALOR DE LA  COLUMNA ELEGIDO AÑADIENDO UN BOTÓN AL RESTO DE REGISTROS.
 

@@ -165,15 +165,15 @@ if(!isset($_SESSION['usuario'])){
 
                         if($activo==1){
                         
-                          echo "<td style=color:'#56C3C5'>$id</td>";
-                          echo "<td style=color:'#56C3C5'>$usuario</td>";
-                          echo "<td style=color:'#56C3C5'>$nombre</td>";
-                          echo "<td style=color:'#56C3C5'>$apellidos</td>";
-                          echo "<td style=color:'#56C3C5'>$telefono</td>";
-                          echo "<td style=color:'#56C3C5'>$email</td>";
-                          echo "<td style=color:'#56C3C5'>$curso</td>";
-                          echo "<td style=color:'#56C3C5'>$activo</td>";
-                          echo '<td ><a href="controlSesiones.php?datos=alumnos&id_Alumno='.$id.'&apellidos='.$apellidos.'&nombre_Alumno='.$nombre.'"><button type="button" class="btn btn-outline-info" style="margin:auto">x</button></a></td>';
+                          echo "<td style='vertical-align:middle; style=color:'#56C3C5'>$id</td>";
+                          echo "<td style='vertical-align:middle; style=color:'#56C3C5'>$usuario</td>";
+                          echo "<td style='vertical-align:middle; style=color:'#56C3C5'>$nombre</td>";
+                          echo "<td style='vertical-align:middle; style=color:'#56C3C5'>$apellidos</td>";
+                          echo "<td style='vertical-align:middle; style=color:'#56C3C5'>$telefono</td>";
+                          echo "<td style='vertical-align:middle; style=color:'#56C3C5'>$email</td>";
+                          echo "<td style='vertical-align:middle; style=color:'#56C3C5'>$curso</td>";
+                          echo "<td style='vertical-align:middle; style=color:'#56C3C5'>$activo</td>";
+                          echo '<td><a href="controlSesiones.php?datos=alumnos&id_Alumno='.$id.'&apellidos='.$apellidos.'&nombre_Alumno='.$nombre.'"><button type="button" class="btn btn-outline-info" style="margin:auto">x</button></a></td>';
                         }else{
 
                           echo "<td class='text-muted' style='vertical-align:middle;'>$id</td>";
@@ -184,6 +184,7 @@ if(!isset($_SESSION['usuario'])){
                           echo "<td class='text-muted' style='vertical-align:middle;'>$email</td>";
                           echo "<td class='text-muted' style='vertical-align:middle;'>$curso</td>";
                           echo "<td class='text-muted' style='vertical-align:middle;'>$activo</td>";
+                          echo '<td><button type="button" class="btn btn-warning disabled" style="margin:auto">o</button></a></td>';
 
 
                         }

@@ -4,8 +4,9 @@
     include("conexionesBD/config.php");
     include("conexionesBD/conexionbd.php");
     include("funciones.php");
-   
- 
+    
+
+    
    if(isset($_POST["usuario"])){
 
         
@@ -28,6 +29,9 @@
             $_SESSION['usuario'] = array();
             $_SESSION['hora'] = date("H:i:s"); 
             $_SESSION['fecha'] = date("d/m/y");
+           
+
+           
             
         
             //consultamos a la base de datos si los valores introducidos corresponden a un usuario con perfil de alumno o de profesor para redireccionar a controlSesiones.php.
@@ -91,19 +95,20 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="estilos/estilos.css" type="text/css">
+    <link rel="stylesheet" href="estilos/est.css" type="text/css">
     
 </head>
 <body style="background-color:#99D6DD">
-    <div  style=' margin-top:30px;'>
-        <div id="conte" class="card bg-light" style="width: 25rem; box-shadow: 7px 10px 8px 2px #90B6BA">
-            
-            <img src="img/escudo.jpg" style="margin:auto; margin-top:30px" width="250px" height="250px" alt="imagen escudo IES Alandalus">
+ <div class="contenido">
+    <div class="formu">
+        <div class="card bg-light" style="width: 20rem; box-shadow: 7px 10px 8px 2px #90B6BA">
+                    
+            <img src="img/escudo.jpg" style="margin:auto; margin-top:30px" width="150px" height="150px" alt="imagen escudo IES Alandalus">
             <div class="card-body">
-                <h4 class="text-center"><b>Iniciar sesión</b></h4>
-                <?php
-                if(isset($_GET["error"])){mostrarMensajeERR($_GET["error"]);};
-                ?>
+                    <h4 class="text-center"><b>Iniciar sesión</b></h4>
+                        <?php
+                        if(isset($_GET["error"])){mostrarMensajeERR($_GET["error"]);};
+                        ?>
                 <form class="formulario" action="index.php" method="POST">
                     <div class="form-group">
                         <label><b>Usuario:</b></label>
@@ -113,12 +118,20 @@
                         <label><b>Contraseña:</b></label>
                         <input type="password" name="password" class="form-control" placeholder="Contraseña" required>  
                     </div>
-                    <button type="submit" class="btn btn-primary">Enviar</button>
-                    
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                        
                 </form>
-            </div>
+            </div>               
         </div>
-    </div>    
-       
+    </div>
+
+    <!-------- IMPLEMENTACIÓN DEL ACCESO A LOS DATOS DEL SERVICIO WEB METEREOLÓGICO EN EL INCLUDE--------------------->
+
+    <div class="grupotarjetas">
+
+        <?php include("servicio.php");?>
+
+    </div>
+ </div> 
 </body>
 </html>

@@ -8,6 +8,7 @@ autoload(null);
 
 
 
+
 if(!isset($_SESSION['usuario'])){
 
   header('location:destruirSesion.php');
@@ -18,6 +19,7 @@ if(!isset($_SESSION['usuario'])){
 $cabeceras_alumnos = ["id", "usuario", "nombre", "apellidos", "teléfono", "email", "curso", "activo"];
 $cabeceras_asignaturas = ["cod.asignatura", "asignatura", "abreviatura", "curso"];
 $cabeceras_curso = ["id.curso", "curso"];
+$cabeceras_notas = ["curso", "asignatura", "profesor", "trimestre", "nota"];
 
 ?>
      <hr></hr>
@@ -57,16 +59,33 @@ $cabeceras_curso = ["id.curso", "curso"];
                   $Asignaturas[] = new Asignatura($consAsignatura->id, $consAsignatura->nombre, $consAsignatura->nombre_corto);
                   
                 };
-                mysqli_free_result($consAsignaturas);
-
-                
+                mysqli_free_result($consAsignaturas); 
 
               };
+              //Cargamos las notas del Alumno
+              
+              if($consNotas= $bd->query( "SELECT * FROM ies_notas WHERE alumno = $idAlumno ORDER BY trimestre ASC")){
+               
+ 
+                while($consNota = $consNotas->fetch_object()){
 
+                  $notas[] = new Notas($consNota->alumno, $consNota->curso, $consNota->asignatura, $consNota->profesor, $consNota->trimestre, $consNota->nota);
+
+                  
+                };
+
+                mysqli_free_result($consNotas);             
+            
+              }else{echo "no hay registros";};
+              
+              
               //Creamos la instancia de la clase Alumno
 
-              $alumno = new Alumno ($consAlumno->id, $consAlumno->usuario, $consAlumno->pass, $consAlumno->nombre, $consAlumno->apellidos, $consAlumno->telefono, $consAlumno->email, $curso, $consAlumno->activo, $Asignaturas);
-            }
+             
+                $alumno = new Alumno ($consAlumno->id, $consAlumno->usuario, $consAlumno->pass, $consAlumno->nombre, $consAlumno->apellidos, $consAlumno->telefono, $consAlumno->email, $curso, $consAlumno->activo, $Asignaturas);
+              
+              
+            };
             
 
             if(isset($_GET["opcion"])){
@@ -83,8 +102,16 @@ $cabeceras_curso = ["id.curso", "curso"];
               } elseif($_GET["opcion"] == "curso"){
                   
                   titulosColumnas($cabeceras_curso);
+              
+              } elseif($_GET["opcion"] == "notas"){
+                  
+                  titulosColumnas($cabeceras_notas);
               };
 
+            }else if(isset($_GET["notificacion"])){
+
+              include("../notificaciones.php"); 
+            
             }else{
                // Este texto con imagen se mostrará antes de haber pulsado cualquier opción de la barra de menú. Una vez pulsado cualquier opción desaparecerá.
                 echo "</br>";
@@ -106,7 +133,7 @@ $cabeceras_curso = ["id.curso", "curso"];
                 
                 echo "<tr>";
 
-                  $alumno->listarDatosEnPantalla(); // Estas funciones las encontraremos en consultas.php
+                  $alumno->listarDatosEnPantalla(); // Estas funciones son métodos de las clases que encontraras en la carpeta clases.
 
                 echo "</tr>";
                   
@@ -132,6 +159,26 @@ $cabeceras_curso = ["id.curso", "curso"];
                   $curso->listarDatosNombre();
 
                 echo "</tr>";
+
+              } elseif ($_GET["opcion"] == "notas") {
+                if(isset($notas)){  
+                  foreach ($notas as $nota) {
+                 
+                    echo "<tr>";
+
+                      $nota->listarDatosEnPantalla();
+                   
+                    echo "</tr>";
+                  };
+                }else{
+                  for($i=0; $i<=4; $i++){
+                   echo "<td>";
+                 
+                    echo "Sin datos";
+                  
+                   echo "</td>";
+                  };
+                };
               };
             };
 

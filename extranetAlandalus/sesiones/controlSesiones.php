@@ -100,7 +100,7 @@
         ?>
        
     </div>
-    <footer class="card-footer p3 p-pmd-5 mt-5 bg-light text-center text-sm-start">Desarrollado por <a href ="https://github.com/EzequielLara" target = "_blank">EzequielLara@github.com</a><span> feb-2021</span></footer>
+    <footer class="card-footer p3 p-pmd-5 mt-5 bg-light text-center text-sm-start">Desarrollado por <a href ="https://github.com/EzequielLara" target = "_blank">EzequielLara@github.com</a><span> abril-2021</span></footer>
 </body> 
 </html>
 <?php

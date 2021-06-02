@@ -12,6 +12,7 @@
 		private $curso;
 		private $activo;
 		private $asignaturas;
+		private $notas;
 
 		//constructor
 		public function __construct($id, $usuario, $pass, $nombre, $apellidos, $telefono, $email, $curso, $activo, $asignaturas)
@@ -26,6 +27,7 @@
 			$this->setCurso($curso);
 			$this->setActivo($activo);
 			$this->setAsignaturas($asignaturas);
+			
 			
 		}
 
@@ -75,6 +77,7 @@
 		public function getAsignaturas(){
 			return $this->asignaturas;
 		}
+	
 
 		//Setters
 		public function setId($id){
@@ -118,6 +121,7 @@
 			$this->asignaturas=$asignaturas;
 			return $this;
 		}
+		
 	}
 	
 /*	

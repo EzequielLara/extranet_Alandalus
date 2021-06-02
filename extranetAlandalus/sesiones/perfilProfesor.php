@@ -6,9 +6,13 @@
  require_once('../autoload.php');
  autoload(null);
 
+$cursoProfesor = $_SESSION['usuario']['curso'];
+
+
 $cabeceras_alumnos = ["id", "usuario", "nombre", "apellidos", "tlf", "email", "curso", "activo", "baja"];
 $cabeceras_cursos = ["id", "nombre"];
 $cabeceras_trimestres = ["id", "nombre", "evaluación", "orden"];
+$cabeceras_evaluacion = ["id","nombre", "apellidos","curso", "asignatura", "mod.notas"];
 
 if(!isset($_SESSION['usuario'])){
 
@@ -60,7 +64,11 @@ if(!isset($_SESSION['usuario'])){
                 } elseif ($_GET["datos"] == "trimestres") {
                   
                   titulosColumnas($cabeceras_trimestres);
-              };
+                
+                } elseif ($_GET["datos"] == "evaluacion") {
+                  
+                  titulosColumnas($cabeceras_evaluacion);
+                };
             }else{
               
 
@@ -102,7 +110,18 @@ if(!isset($_SESSION['usuario'])){
                 </div>
                   <button type="submit" class="btn btn-primary">Dar de alta</button>
                 </form>';
-                }; 
+                };
+                
+
+              }else if(isset($_GET["notificacion"])){
+
+                include("../notificaciones.php"); 
+              
+              }elseif(isset($_GET['evaluacion'])){
+
+                include("../evaluaciones.php");
+
+
               }else{
 
               //Mientras no se muestren datos ni formularios añadiremos un mensaje y una imagen decorativa:
@@ -128,7 +147,7 @@ if(!isset($_SESSION['usuario'])){
                   include("../baja.php");
                 }else{
                                    
-                  /*--------------------PAGINACIÓN------------------------*/
+                  /*--------------------PAGINACIÓN ALUMNOS------------------------*/
 
                  if($_GET['pagina']){
                 
@@ -184,7 +203,7 @@ if(!isset($_SESSION['usuario'])){
                           echo "<td class='text-muted' style='vertical-align:middle;'>$email</td>";
                           echo "<td class='text-muted' style='vertical-align:middle;'>$curso</td>";
                           echo "<td class='text-muted' style='vertical-align:middle;'>$activo</td>";
-                          echo '<td><button type="button" class="btn btn-warning disabled" style="margin:auto">o</button></a></td>';
+                          echo '<td><button type="button" class="btn btn-outline-warning disabled" style="margin:auto">-</button></a></td>';
 
 
                         }
@@ -254,8 +273,47 @@ if(!isset($_SESSION['usuario'])){
                     echo "</tr>";
                   };
                   
-              }
+              }elseif($_GET["datos"] == "evaluacion"){
+
+                $consultaAlumnosProf = $bd->query( "SELECT * FROM ies_alumno WHERE curso = $cursoProfesor");
+                $consultaNotas = $bd->query( "SELECT * FROM ies_notas");
+
+                if($consultaAlumnosProf){
+                
+                  while(($consultaAlumnosP = $consultaAlumnosProf->fetch_object())&&($consultaNotasP = $consultaNotas->fetch_object())){
+
+                    // Solo se listarán los alumnos pertenecientes al curso del profesor y que esten activos
+                    if($consultaAlumnosP->activo){
+
+                      echo "<tr>";
+                  
+                      for($i=0; $i<1;$i++){
+
+                          echo "<td style='vertical-align:middle; style=color:'#56C3C5'>$consultaAlumnosP->id</td>";
+                         
+                          echo "<td style='vertical-align:middle; style=color:'#56C3C5'>$consultaAlumnosP->nombre</td>";
+                          echo "<td style='vertical-align:middle; style=color:'#56C3C5'>$consultaAlumnosP->apellidos</td>";                        
+                          echo "<td style='vertical-align:middle; style=color:'#56C3C5'>$consultaAlumnosP->curso</td>";
+                          echo "<td style='vertical-align:middle; style=color:'#56C3C5'>$consultaNotasP->asignatura</td>";
+                          echo '<td><a href="../evaluaciones.php?evaluacion=true&datos=alumnos&id_Alumno='.$consultaAlumnosP->id.'&apellidos='.$consultaAlumnosP->apellidos.'&nombre_Alumno='.$consultaAlumnosP->nombre.'"><button type="button" class="btn btn-outline-info" style="margin:auto">!</button></a></td>';
+                        }
+                    };
+                    
+                    
+                  };
+                  mysqli_free_result($consultaAlumnosProf);
+  
+                  
+  
+                };
+
+
+              };
+              
+            
           }
+
+        
 
           ?>
       </tr>

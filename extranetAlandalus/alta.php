@@ -73,5 +73,6 @@ $altaAlumno = "INSERT INTO ies_alumno VALUES ($proximo, concat(concat('@','$nomb
     };
     
     ?>
+    <div>Iconos diseñados por <a href="" title="Smartline">Smartline</a> from <a href="https://www.flaticon.es/" title="Flaticon">www.flaticon.es</a></div>
     </body>
     </html>

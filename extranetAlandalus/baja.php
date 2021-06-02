@@ -5,6 +5,7 @@ $nombre_alumno = $_GET['nombre_Alumno'];
 $apellido_alumno = $_GET['apellidos'];
 
 
+
 $bajaAlumno = "UPDATE ies_alumno SET activo = 0 WHERE id = $id_alumno";
 
     if ($bd->query($bajaAlumno) === TRUE) {

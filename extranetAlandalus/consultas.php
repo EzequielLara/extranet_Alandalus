@@ -11,6 +11,7 @@ $consultaProfesores = $bd->query( "SELECT * FROM ies_profesor LIMIT 40");
 $consultaTrimestres = $bd->query("SELECT * FROM ies_trimestres LIMIT 40");
 $consultaCursos = $bd->query( "SELECT * FROM ies_curso LIMIT 40");
 $consultaAsignaturas = $bd->query( "SELECT * FROM ies_asignatura LIMIT 40");
+$consultaNotas = $bd->query( "SELECT * FROM ies_notas LIMIT 40");
 
 
 session_start();

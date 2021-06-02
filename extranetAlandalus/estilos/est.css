@@ -1,0 +1,67 @@
+ .imagenTarjeta{
+
+   float: left;
+   margin:8px;
+   margin-top:12px
+  
+
+   
+ 
+}
+.tarjeta{
+
+   display: inline-block;
+   width: 95%;
+   height: 100px;
+   margin-top: 15px;
+   background-color: white;
+   box-shadow: 7px 10px 8px 2px #90B6BA;
+   font-size: 13px;
+
+}
+
+.formu{
+
+ float:left;
+ width: 340px;
+     
+}
+
+.contenido{
+
+    width: 55%;
+    height: auto;
+    margin: auto;
+    margin-top: 3%;
+    
+
+
+}
+
+.grupotarjetas{
+    display: inline-block; 
+    width: 340px;
+
+
+   
+}
+
+.alerta{
+
+    
+    display: inline-block;
+    width: 100%;
+    height: 100px;
+    margin-top: 15px;
+    background-color: sandybrown;
+    box-shadow: 7px 10px 8px 2px #90B6BA;
+    font-size: 13px;
+}
+
+.texto{
+
+ text-align: left;
+}
+
+
+
